@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Str elave</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            text-align: center;
+            margin-top: 10px;
+        }
+        td{width: 40px;height: 40px;
+            border: 1px solid #000;
+        }
+        .white{background-color: #fff;}
+        .black{background-color: #000;}
+        input {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input onchange="yaz()" id="inp" type="number" placeholder="input a number " />
+    <table></table>
+
+    <span>№7.</span>
+    <input onchange="yaz1()" id="inp1" type="number" placeholder="neceye kimi fibonaci yaz" />
+    <h3></h3>
+
+    <span>№8.</span>
+    <input onchange="pol()" id="inp2" type="text" placeholder="polindrom/deyil"/>
+    <h3 id="polindrom"></h3>
+
+    <span>№9.</span>
+    <input onchange="en()" id="inp3" type="text" placeholder="input numbers vergulnen"/>
+    <h3 id="boyuk"></h3>
+
+    <span>№10.!!</span>
+    <input onchange="tekrar()" id="inp4" type="text" placeholder="input text"/>
+    <h3 id="tekr"></h3>
+
+    <script>
+        const tables=document.querySelectorAll('table');
+        const inp=document.getElementById('inp');
+        function yaz(){
+            let kod1='';
+            for(let i=0;i<Number(inp.value);i++){
+                kod1+=`<tr>`;
+                for(let j=0;j<Number(inp.value);j++){
+                    kod1+=(i+j)%2 ? `<td>${i},${j}</td>` :`<td class="black"></td>` ;
+                }
+                kod1+=`</tr>`;
+            }
+            tables[0].innerHTML=kod1;
+        }
+    </script>
+
+    <script>
+        let arr=["Elnur", "Tünzalə", "Əli", "Günay", "Nurlan", "Leyla"];
+        console.log('№5.Arrayin içindəki lengthi 5 dən böyük elementlər:');
+        let a=0;
+        for(let i=0;i<arr.length;i++){
+            arr[i].length>5 ? 
+                            (a+=1, console.log(`Element ${a}:`,arr[i]))
+                            : '';
+        }
+    </script>
+
+    <script>
+        const h3=document.querySelector('h3');
+        const inp1=document.getElementById('inp1');
+        function yaz1(){
+            let kod2='0';
+            let ar=[0,1];
+            let a;
+            for(let i=1;i<=Number(inp1.value);i++){
+                ar[i+1]=ar[i]+ar[i-1];
+                kod2+=`,${ar[i]}`;
+            }
+            h3.innerHTML=kod2;
+        }
+    </script>
+
+    <script>
+        const polindrom=document.getElementById('polindrom');
+        const inp2=document.getElementById('inp2');
+        let mas;
+        let rev;
+        function pol(){
+            mas=inp2.value.split('');
+            // rev=mas.reverse();
+            rev=mas.toReversed(); //massivlerde olur
+           // mas==rev ? polindrom.innerHTML=`Polindrom` : polindrom.innerHTML=`Polindrom deyil`;
+            mas.toString()==rev.toString() ? polindrom.innerHTML=`Polindrom` : polindrom.innerHTML=`Polindrom deyil`;
+        }
+    </script>
+
+    <script>
+        const boyuk=document.getElementById('boyuk');
+        const inp3=document.getElementById('inp3');
+        
+        function en(){
+            let numAr=inp3.value.split(',');
+            let max=numAr[0];
+            for(let i=1;i<numAr.length;i++){
+                Number(numAr[i]>max) ? max=Number(numAr[i]) :'';
+            }//hamsi - olanda??
+            boyuk.innerHTML=`${max}-en boyuk`;
+        }
+    </script>
+
+    <script>
+        //Təkrarlanan elementləri və neçə dəfə təkrarlandıqlarını çap et.
+        const inp4=document.getElementById('inp4');
+        const tekr=document.getElementById('tekr');
+
+        function tekrar(){
+            let text=inp4.value.split('');
+            let count=0;
+            let t;
+            for(let i=0;i<text.length;i++){
+                for(let j=1;j<text.length;j++){
+                    text[i]==text[j] ? (count++, t=text[i]): ''
+                }
+            }
+            tekr.innerHTML=`${t} ${count} defe tekrarlanib`;
+        }
+    </script>
+
+</body>
+</html>
