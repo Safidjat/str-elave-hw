@@ -27,7 +27,7 @@
     <span>№7.a</span>
     <input onchange="yaz1()" id="inp1" type="number" placeholder="nece dene fibonaci olsun" />
     <h3></h3>
-    <span>№7.b!</span>
+    <span>№7.b</span>
     <input onchange="yaz2()" id="inp11" type="number" placeholder="neceye kimi fibonaci " />
     <h3 id="fib"></h3>
 
@@ -58,7 +58,7 @@
     <h3 id="min2"></h3>
 <hr>
 
-    <span>№10.!!</span>
+    <span>№10.</span>
     <input onchange="tekrar()" id="inp4" type="text" placeholder="input text"/>
     <h3 id="tekr"></h3>
 
@@ -152,14 +152,26 @@
 
         function tekrar(){
             let text=inp4.value.split('');
-            let count=0;
             let t;
+            tekr.innerHTML=``;
+            let plus=true;
             for(let i=0;i<text.length;i++){
-                for(let j=1;j<text.length;j++){
-                    text[i]==text[j] ? (count++, t=text[i]): ''
+                let count=0;
+                for(let j=0;j<text.length;j++){
+                    if(text[i]==text[j]){
+                        t=text[i];
+                        count+=1;
+                        plus=true;
+                    }
+                }
+                for(let k=i-1;k>=0;k--){
+                    if(text[k]==text[i]) plus=false;
+                }
+                if(plus && count>1){
+                    tekr.innerHTML+=`${t} - ${count} defe tekrarlanib`+'<br/>';
                 }
             }
-            tekr.innerHTML=`${t} ${count} defe tekrarlanib`;
+            
         }
     </script>
 
