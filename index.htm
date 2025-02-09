@@ -102,10 +102,11 @@
         
         function en(){
             let numAr=inp3.value.split(',');
+            
             let max=numAr[0];
             for(let i=1;i<numAr.length;i++){
-                Number(numAr[i]>max) ? max=Number(numAr[i]) :'';
-            }//hamsi - olanda??
+                Number(numAr[i])>max ? max=Number(numAr[i]) :'';
+            }//hamsi negativ olanda??
             boyuk.innerHTML=`${max}-en boyuk`;
         }
     </script>
