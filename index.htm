@@ -24,9 +24,12 @@
     <input onchange="yaz()" id="inp" type="number" placeholder="input a number " />
     <table></table>
 
-    <span>№7.</span>
-    <input onchange="yaz1()" id="inp1" type="number" placeholder="neceye kimi fibonaci yaz" />
+    <span>№7.a</span>
+    <input onchange="yaz1()" id="inp1" type="number" placeholder="nece dene fibonaci olsun" />
     <h3></h3>
+    <span>№7.b!</span>
+    <input onchange="yaz2()" id="inp11" type="number" placeholder="neceye kimi fibonaci " />
+    <h3 id="fib"></h3>
 
     <span>№8.</span>
     <input onchange="pol()" id="inp2" type="text" placeholder="polindrom/deyil"/>
@@ -35,6 +38,25 @@
     <span>№9.</span>
     <input onchange="en()" id="inp3" type="text" placeholder="input numbers vergulnen"/>
     <h3 id="boyuk"></h3>
+
+<hr>
+    <h3>Bubble Sort</h3>
+    <span>a.↓</span>
+    <input onchange="sirala1()" type="text" id="sort1" placeholder="input numbers vergulnen" />
+    <h3 id="max"></h3>
+
+    <span>b.</span>
+    <input onchange="sirala2()" type="text" id="sort2" placeholder="input numbers vergulnen" />
+    <h3 id="min"></h3>
+
+    <h3>sort()</h3>
+    <span>b.</span>
+    <input onchange="sirala3()" type="text" id="sort3" placeholder="input numbers vergulnen" />
+    <h3 id="max2"></h3>
+    <span>b.</span>
+    <input onchange="sirala4()" type="text" id="sort4" placeholder="input numbers vergulnen" />
+    <h3 id="min2"></h3>
+<hr>
 
     <span>№10.!!</span>
     <input onchange="tekrar()" id="inp4" type="text" placeholder="input text"/>
@@ -71,14 +93,26 @@
         const h3=document.querySelector('h3');
         const inp1=document.getElementById('inp1');
         function yaz1(){
-            let kod2='0';
             let ar=[0,1];
-            let a;
-            for(let i=1;i<=Number(inp1.value);i++){
+            let kod2=`${ar[0]}`;
+            for(let i=1;i<Number(inp1.value);i++){
                 ar[i+1]=ar[i]+ar[i-1];
                 kod2+=`,${ar[i]}`;
             }
             h3.innerHTML=kod2;
+        }
+    </script>
+    <script>
+        const inp11=document.getElementById('inp11');
+        const fib=document.getElementById('fib');
+        function yaz2(){
+            let fibAr=[0,1];
+            let kodd=`${fibAr[0]}`;
+            for(let i=1;fibAr[i]<=Number(inp11.value);i++){
+                kodd+=`,${fibAr[i]}`;
+                fibAr[i+1]=fibAr[i]+fibAr[i-1]
+            }
+            fib.innerHTML=kodd;
         }
     </script>
 
@@ -129,5 +163,95 @@
         }
     </script>
 
+    <script>
+        const spans=document.querySelectorAll('span');
+        const sort1=document.getElementById('sort1');
+        const max=document.getElementById('max');
+        const prev=spans[4].innerHTML;
+        // spans[3].innerHTML=' '.repeat(1)+prev;
+        // sort1.value=' '.repeat(6) + 'Salam';
+        spans[4].innerHTML="&nbsp;".repeat(6)+prev; //non breaking space
+        spans[5].innerHTML="&nbsp;".repeat(6)+'b.↑';
+        spans[6].innerHTML="&nbsp;".repeat(6)+'c.↓';
+        spans[7].innerHTML="&nbsp;".repeat(6)+'d.↑';
+         
+        function sirala1(){
+            const nums=sort1.value.split(',');
+            for(let i=0;i<nums.length;i++){
+                for(let j=i;j<nums.length;j++){
+                    if(Number(nums[i])<Number(nums[j])){
+                        let temp=nums[i];
+                        nums[i]=nums[j];
+                        nums[j]=temp;
+                    }
+
+                }
+            }
+            let sorted1=`${nums[0]}`;
+            for(let i=1;i<nums.length;i++){
+                sorted1+=`,${nums[i]}`
+            }
+            max.innerHTML=sorted1;
+        }
+    </script>
+
+    <script>
+        const sort2=document.getElementById('sort2');
+        const min=document.getElementById('min');
+
+        function sirala2(){
+            const nums2=sort2.value.split(',');
+            for(let i=0;i<nums2.length;i++){
+                for(let j=i;j<nums2.length;j++){
+                    if(Number(nums2[i])>Number(nums2[j])){
+                        let temp=nums2[j];
+                        nums2[j]=nums2[i];
+                        nums2[i]=temp;
+                    }
+                }
+            }
+            let sorted2=`${nums2[0]}`;
+            for(let i=1;i<nums2.length;i++){
+                sorted2+=`,${nums2[i]}`;
+            }
+            min.innerHTML=sorted2;
+        }
+    </script>
+
+    <script>
+        const min2=document.getElementById('min2');
+        const max2=document.getElementById('max2');
+        const sort3=document.getElementById('sort3');
+        const sort4=document.getElementById('sort4');
+        
+        //sort() yesli rabotayet to budet menat mestami svoi argumenti
+        function sirala3(){
+            const nums3=sort3.value.split(',');
+            for(let i=0;i<nums3.length;i++){
+                nums3[i]=Number(nums3[i])
+            }
+            nums3.sort((b,a)=>(a-b));//==nums4.sort((a,b)=>(a-b));
+            //a-b<0 yerlerini deyismir
+            //a-b>0 olur(a,b)
+            let sorted3=`${nums3[0]}`;
+            for(let i=1;i<nums3.length;i++){
+                sorted3+=`,${nums3[i]}`;
+            }
+            max2.innerHTML=sorted3;
+        }
+        function sirala4(){
+            const nums4=sort4.value.split(',');
+            nums4.map(Number);
+            
+            nums4.sort((b,a)=>(b-a));//==nums4.sort((a,b)=>(b-a));
+            //b-a<0 yerlerini deyismir
+            //b-a>0 olur(a,b)
+            let sorted4=`${nums4[0]}`;
+            for(let i=1;i<nums4.length;i++){
+                sorted4+=`,${nums4[i]}`;
+            }
+            min2.innerHTML=sorted4;
+        }
+    </script>
 </body>
 </html>
